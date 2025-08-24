@@ -36,8 +36,8 @@ bool PipeManager::collidesWith(const sf::FloatRect& bounds) const {
     return false;
 }
 
-bool PipeManager::hasPassed(const sf::FloatRect& bounds) const {
-    for (const PipePair pipe : pipes) {
+bool PipeManager::hasPassed(const sf::FloatRect& bounds) {
+    for (const PipePair& pipe : pipes) {
         if (pipe.hasPassed(bounds)) {
             return true;
         }

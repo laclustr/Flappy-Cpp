@@ -1,7 +1,21 @@
 add_executable(flappyBird
     main.cpp
+
+    objects/Bird.cpp
+    objects/Pipe.cpp
+    objects/PipeManager.cpp
+    objects/PipePair.cpp
+
+    states/BaseState.cpp
+    states/CountdownState.cpp
+    states/HighScoreState.cpp
+    states/LostState.cpp
+    states/MenuState.cpp
+    states/PauseState.cpp
     states/PlayState.cpp
-    states/StateMachine.cpp 
+    states/StateMachine.cpp
+
+    utils/GameFont.cpp
 )
 
 target_include_directories(flappyBird

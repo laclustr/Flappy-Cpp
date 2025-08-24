@@ -4,31 +4,6 @@
 
 #include <optional>
 
-Pipe::Pipe(float x, float y, bool isTop) {
-    if (!texture.loadFromFile(PIPE_PATH)) {}
-    if (isTop) {
-        sprite.setTexture(texture);
-    } else {
-        sprite.setTexture(texture);
-        sprite.setScale({1.f, -1.f});
-    }
-    sprite.setPosition({x, y});
-}
-
-Pipe::~Pipe() {}
-
-void Pipe::update(const float dt) {
-    sprite.move({-PIPE_SPEED * dt, 0});
-}
-
-void Pipe::render(sf::RenderWindow& window) {
-    window.draw(sprite);
-}
-
-sf::FloatRect Pipe::getBounds() const {
-    return sprite.getGlobalBounds();
-}
-
 PipePair::PipePair() 
     : topPipe(DISP_WIDTH, 0, true), 
       bottomPipe(DISP_WIDTH, DISP_HEIGHT - bottomPipe.getBounds().size.y, false),

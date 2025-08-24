@@ -4,7 +4,7 @@
 
 #include <optional>
 
-Bird::Bird(int playerNum, sf::Keyboard::Key jumpKey) {
+Bird::Bird(int playerNum, sf::Keyboard::Key jumpKey) : sprite(texture) {
     this->playerNum = playerNum;
     this->jumpKey = jumpKey;
     this->isAlive = true;
@@ -14,6 +14,7 @@ Bird::Bird(int playerNum, sf::Keyboard::Key jumpKey) {
     this->velocity = 0.f;
 
     if (!texture.loadFromFile(BIRD_ASSET_PATH)) {
+        throw std::runtime_error("Failed to load bird texture");
     }
     sprite.setTexture(texture);
     sprite.setPosition({100.f, 300.f});
@@ -47,9 +48,7 @@ void Bird::jump() {
 }
 
 bool Bird::collides(sf::Sprite other) {
-    sf::FloatRect birdBounds = sprite.getGlobalBounds();
-    sf::FloatRect otherBounds = other.getGlobalBounds();
-    std::optional<sf::FloatRect> intersection = birdBounds.findIntersection(otherBounds);
+    auto intersection = sprite.getGlobalBounds().findIntersection(other.getGlobalBounds());
     return intersection.has_value();
 }
 

@@ -1,22 +1,8 @@
 #pragma once
 
-#include "flappyBird/objects/Bird.hpp"
+#include "Pipe.hpp"
 
 #include <SFML/Graphics.hpp>
-
-class Pipe {
-    public:
-        Pipe(float x, float y, bool isTop);
-        ~Pipe();
-
-        void update(float dt);
-        void render(sf::RenderWindow& window);
-
-        sf::FloatRect getBounds() const;
-    private:
-        sf::Sprite sprite;
-        sf::Texture texture;
-};
 
 class PipePair {
     public:
