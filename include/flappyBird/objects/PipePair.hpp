@@ -2,6 +2,17 @@
 
 #include <SFML/Graphics.hpp>
 
+class Pipe {
+    public:
+        Pipe(float x, float y, bool isTop);
+        ~Pipe();
+
+        void update(float dt);
+    private:
+        sf::Sprite sprite;
+        sf::Texture texture;
+};
+
 class PipePair {
     public:
         PipePair();
@@ -16,15 +27,4 @@ class PipePair {
         Pipe bottomPipe;
 
         bool passed;
-};
-
-class Pipe {
-    public:
-        Pipe(float x, float y, bool isTop);
-        ~Pipe();
-
-        void update(float dt);
-    private:
-        sf::Sprite sprite;
-        sf::Texture texture;
 };

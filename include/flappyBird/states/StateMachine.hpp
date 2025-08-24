@@ -14,6 +14,8 @@
 #include <string>
 #include <unordered_map>
 
+class BaseState;
+
 class StateMachine {
     public:
         StateMachine(sf::RenderWindow& window);

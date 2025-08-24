@@ -1,13 +1,14 @@
-#include "StateMachine.hpp"
+#include "flappyBird/states/StateMachine.hpp"
 
-#include "PlayState.hpp"
+#include "flappyBird/states/PlayState.hpp"
 
 #include "flappyBird/objects/Bird.hpp"
+#include "flappyBird/utils/GameFont.hpp"
 #include "flappyBird/utils/config.h"
 
 #include <SFML/Graphics.hpp>
 
-StateMachine::StateMachine(sf::RenderWindow& window) {
+StateMachine::StateMachine(sf::RenderWindow& window) : font("assets/fonts/FlappyFont.ttf", sf::Color::White) {
     this->window = &window;
 
     states = {

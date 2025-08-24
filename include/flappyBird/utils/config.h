@@ -1,7 +1,9 @@
+#pragma once
+
 const int DISP_WIDTH = 800;
 const int DISP_HEIGHT = 600;
 
-const enum State {
+enum State {
     MENU,
     COUNTDOWN,
     PLAYING,

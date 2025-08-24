@@ -5,7 +5,9 @@
 
 #include "../objects/PipeManager.hpp"
 
-#include <vector>
+#include <set>
+
+class StateMachine;
 
 class PlayState : public BaseState {
     public:

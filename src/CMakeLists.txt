@@ -1,5 +1,7 @@
 add_executable(flappyBird
     main.cpp
+    states/PlayState.cpp
+    states/StateMachine.cpp 
 )
 
 target_include_directories(flappyBird

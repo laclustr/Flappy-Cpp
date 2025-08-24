@@ -2,6 +2,10 @@
 
 #include "StateMachine.hpp"
 
+#include <SFML/Graphics.hpp>
+
+#include <set>
+
 class BaseState {
     public:
         virtual ~BaseState();

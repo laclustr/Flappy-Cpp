@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <set>
 
 class Bird {
     public:
