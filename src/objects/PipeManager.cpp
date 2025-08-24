@@ -24,3 +24,23 @@ void PipeManager::update(float dt) {
         }
     }
 }
+
+bool PipeManager::collidesWith(const sf::FloatRect& bounds) const {
+    for (const auto& pipe : pipes) {
+        std::optional<sf::FloatRect> topIntersection = pipe.getTopBounds().findIntersection(bounds);
+        std::optional<sf::FloatRect> bottomIntersection = pipe.getBottomBounds().findIntersection(bounds);
+        if (topIntersection.has_value() || bottomIntersection.has_value()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool PipeManager::hasPassed(const sf::FloatRect& bounds) const {
+    for (const PipePair pipe : pipes) {
+        if (pipe.hasPassed(bounds)) {
+            return true;
+        }
+    }
+    return false;
+}

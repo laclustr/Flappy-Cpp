@@ -12,12 +12,17 @@ class Bird {
         void update(const std::set<sf::Keyboard::Key>& keysDown, const float dt);
         void render(sf::RenderWindow& window);
 
-        void collides(sf::Sprite other);
-        void hits_bottom();
-        void above_screen();
+        sf::FloatRect getBounds() const;
+
+        bool collides(sf::Sprite other);
+        bool hits_bottom();
+        bool above_screen();
+
+        bool is_alive() const;
+        void kill();
 
     private:
-        void _jump();
+        void jump();
 
         sf::Sprite sprite;
         sf::Texture texture;
