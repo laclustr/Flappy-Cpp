@@ -26,12 +26,16 @@ void PlayState::update(const std::set<sf::Keyboard::Key>& keysDown, const float 
             stateMachine->changeState(State::LOST);
         }
 
-        if (pipeManager->collidesWith(bird->getBounds())) {
+        // Use optimized combined check instead of separate collision and passing checks
+        // This reduces iterations from 2N to N where N is the number of pipes
+        auto [collided, passed] = pipeManager->checkBirdInteractionOptimized(bird->getBounds());
+        
+        if (collided) {
             bird->kill();
             stateMachine->changeState(State::LOST);
         }
 
-        if (bird->above_screen() && pipeManager->hasPassed(bird->getBounds())) {
+        if (bird->above_screen() && passed) {
             bird->kill();
             stateMachine->changeState(State::LOST);
         }

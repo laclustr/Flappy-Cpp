@@ -12,8 +12,11 @@ class PipePair {
         void update(float dt);
 
         bool isOffScreen() const;
-        bool hasPassed(sf::FloatRect bounds);
+        bool hasPassed(sf::FloatRect bounds) const;
         bool collidesWith(const sf::FloatRect& bounds) const;
+        
+        // Optimized method that checks collision using cached bounds
+        bool collidesWithOptimized(const sf::FloatRect& bounds, const sf::FloatRect& topBounds, const sf::FloatRect& bottomBounds) const;
 
         sf::FloatRect getTopBounds() const;
         sf::FloatRect getBottomBounds() const;
@@ -22,5 +25,5 @@ class PipePair {
         Pipe topPipe;
         Pipe bottomPipe;
 
-        bool passed;
+        mutable bool passed;
 };

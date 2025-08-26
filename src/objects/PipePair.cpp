@@ -24,7 +24,7 @@ bool PipePair::isOffScreen() const {
     return topPipe.getBounds().position.x + topPipe.getBounds().size.x < 0;
 }
 
-bool PipePair::hasPassed(const sf::FloatRect bounds) {
+bool PipePair::hasPassed(const sf::FloatRect bounds) const {
     if (!passed && topPipe.getBounds().position.x + topPipe.getBounds().size.x < bounds.position.x) {
         passed = true;
         return true;
@@ -35,6 +35,12 @@ bool PipePair::hasPassed(const sf::FloatRect bounds) {
 bool PipePair::collidesWith(const sf::FloatRect& bounds) const {
     std::optional<sf::FloatRect> topIntersection = topPipe.getBounds().findIntersection(bounds);
     std::optional<sf::FloatRect> bottomIntersection = bottomPipe.getBounds().findIntersection(bounds);
+    return topIntersection.has_value() || bottomIntersection.has_value();
+}
+
+bool PipePair::collidesWithOptimized(const sf::FloatRect& bounds, const sf::FloatRect& topBounds, const sf::FloatRect& bottomBounds) const {
+    std::optional<sf::FloatRect> topIntersection = topBounds.findIntersection(bounds);
+    std::optional<sf::FloatRect> bottomIntersection = bottomBounds.findIntersection(bounds);
     return topIntersection.has_value() || bottomIntersection.has_value();
 }
 
