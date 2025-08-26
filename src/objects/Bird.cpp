@@ -48,11 +48,11 @@ void Bird::jump() {
 }
 
 bool Bird::collides(sf::Sprite other) {
-    return sprite.getGlobalBounds().intersects(other.getGlobalBounds());
+    return sprite.getGlobalBounds().findIntersection(other.getGlobalBounds()).has_value();
 }
 
 bool Bird::hits_bottom() {
-    return sprite.getPosition().y + sprite.getGlobalBounds().height > DISP_HEIGHT;
+    return sprite.getPosition().y + sprite.getGlobalBounds().size.y > DISP_HEIGHT;
 }
 
 bool Bird::above_screen() {

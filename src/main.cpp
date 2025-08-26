@@ -6,7 +6,7 @@
 #include <set>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(DISP_WIDTH, DISP_HEIGHT), "Flappy Bird");
+    sf::RenderWindow window(sf::VideoMode({DISP_WIDTH, DISP_HEIGHT}), "Flappy Bird");
     sf::Clock clock;
 
     StateMachine stateMachine(window);
@@ -16,13 +16,12 @@ int main() {
     while (window.isOpen()) {
         keysdown.clear();
 
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::KeyPressed) {
-                keysdown.insert(event.key.code);
+        while (const std::optional<sf::Event> event = window.pollEvent()) {
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                keysdown.insert(keyPressed->code);
             }
 
-            if (event.type == sf::Event::Closed) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
         }

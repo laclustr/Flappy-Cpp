@@ -25,10 +25,10 @@ target_include_directories(flappyBird
 
 target_link_libraries(flappyBird
     PRIVATE
-        sfml-graphics
-        sfml-window
-        sfml-system
-        sfml-audio
+        SFML::Graphics
+        SFML::Window
+        SFML::System
+        SFML::Audio
 )
 
 add_custom_command(TARGET flappyBird

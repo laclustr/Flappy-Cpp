@@ -29,7 +29,7 @@ void PipeManager::update(float dt) {
 
 bool PipeManager::collidesWith(const sf::FloatRect& bounds) const {
     for (const auto& pipe : pipes) {
-        if (pipe.getTopBounds().intersects(bounds) || pipe.getBottomBounds().intersects(bounds)) {
+        if (pipe.getTopBounds().findIntersection(bounds).has_value() || pipe.getBottomBounds().findIntersection(bounds).has_value()) {
             return true;
         }
     }
@@ -51,7 +51,7 @@ std::pair<bool, bool> PipeManager::checkBirdInteraction(const sf::FloatRect& bou
     
     for (const auto& pipe : pipes) {
         if (!collided) {
-            if (pipe.getTopBounds().intersects(bounds) || pipe.getBottomBounds().intersects(bounds)) {
+            if (pipe.getTopBounds().findIntersection(bounds).has_value() || pipe.getBottomBounds().findIntersection(bounds).has_value()) {
                 collided = true;
                 return {true, false};
             }
@@ -69,15 +69,15 @@ std::pair<bool, bool> PipeManager::checkBirdInteractionOptimized(const sf::Float
     bool collided = false;
     bool passed = false;
     
-    const float birdLeft = bounds.left;
-    const float birdRight = bounds.left + bounds.width;
+    const float birdLeft = bounds.position.x;
+    const float birdRight = bounds.position.x + bounds.size.x;
     
     for (const auto& pipe : pipes) {
         const sf::FloatRect topBounds = pipe.getTopBounds();
         const sf::FloatRect bottomBounds = pipe.getBottomBounds();
         
-        const float pipeLeft = topBounds.left;
-        const float pipeRight = topBounds.left + topBounds.width;
+        const float pipeLeft = topBounds.position.x;
+        const float pipeRight = topBounds.position.x + topBounds.size.x;
         
         if (pipeLeft > birdRight + 50.0f) {
             continue;
@@ -91,7 +91,7 @@ std::pair<bool, bool> PipeManager::checkBirdInteractionOptimized(const sf::Float
         }
         
         if (!collided) {
-            if (topBounds.intersects(bounds) || bottomBounds.intersects(bounds)) {
+            if (topBounds.findIntersection(bounds).has_value() || bottomBounds.findIntersection(bounds).has_value()) {
                 collided = true;
                 return {true, false};
             }
