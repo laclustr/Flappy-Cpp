@@ -48,8 +48,7 @@ void Bird::jump() {
 }
 
 bool Bird::collides(sf::Sprite other) {
-    auto intersection = sprite.getGlobalBounds().findIntersection(other.getGlobalBounds());
-    return intersection.has_value();
+    return sprite.getGlobalBounds().findIntersection(other.getGlobalBounds()).has_value();
 }
 
 bool Bird::hits_bottom() {

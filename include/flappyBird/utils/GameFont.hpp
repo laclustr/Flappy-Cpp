@@ -10,14 +10,14 @@ class GameFont {
         GameFont(const std::string& path, sf::Color color = sf::Color::White);
         ~GameFont();
 
-        void addSize(const int size);
+        void addSize(int size);
         void setFontSize(const int size);
         void setColor(const sf::Color& color);
 
         void render(sf::RenderWindow& window, const std::string& text, float x, float y);
 
         int getSize() const;
-        sf::Color& getColor() const;
+        const sf::Color& getColor() const;
 
     private:
         std::string path;

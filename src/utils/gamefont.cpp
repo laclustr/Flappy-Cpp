@@ -16,38 +16,35 @@ GameFont::GameFont(const std::string& path, sf::Color color) {
 
 GameFont::~GameFont() {}
 
-void render(sf::RenderWindow& window, const std::string& text, float x, float y) {
-    sf::Text drawableText;
-    drawableText.setFont(fontSizes[currFontSize]);
-    drawableText.setString(text);
-    drawableText.setCharacterSize(currFontSize);
+void GameFont::render(sf::RenderWindow& window, const std::string& text, float x, float y) {
+    sf::Text drawableText(fontSizes[currFontSize], text, currFontSize);
     drawableText.setFillColor(textColor);
-    drawableText.setPosition(x, y);
+    drawableText.setPosition({x, y});
     window.draw(drawableText);
 }
 
-void addSize(int size) {
+void GameFont::addSize(int size) {
     sf::Font font;
-    if (!font.loadFromFile(path)) {
+    if (!font.openFromFile(path)) {
         throw std::runtime_error("Failed to load font: " + path);
     }
     fontSizes[size] = font;
 }
 
-void setFontSize(const int size) {
+void GameFont::setFontSize(const int size) {
     if (fontSizes.find(size) != fontSizes.end()) {
         currFontSize = size;
     }
 }
 
-void setColor(const sf::Color& color) {
+void GameFont::setColor(const sf::Color& color) {
     textColor = color;
 }
 
-const int getSize() const {
+int GameFont::getSize() const {
     return currFontSize;
 }
 
-const sf::Color& getColor() const {
-    return &textColor;
+const sf::Color& GameFont::getColor() const {
+    return textColor;
 }
