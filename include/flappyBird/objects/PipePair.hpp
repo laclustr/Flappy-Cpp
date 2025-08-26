@@ -10,6 +10,7 @@ class PipePair {
         ~PipePair();
 
         void update(float dt);
+        void render(sf::RenderWindow& window);
 
         bool isOffScreen() const;
         bool hasPassed(sf::FloatRect bounds) const;

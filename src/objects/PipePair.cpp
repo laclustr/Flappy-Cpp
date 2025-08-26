@@ -20,6 +20,11 @@ void PipePair::update(const float dt) {
     bottomPipe.update(dt);
 }
 
+void PipePair::render(sf::RenderWindow& window) {
+    topPipe.render(window);
+    bottomPipe.render(window);
+}
+
 bool PipePair::isOffScreen() const {
     return topPipe.getBounds().position.x + topPipe.getBounds().size.x < 0;
 }

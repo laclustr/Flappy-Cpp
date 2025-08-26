@@ -27,6 +27,12 @@ void PipeManager::update(float dt) {
     }
 }
 
+void PipeManager::render(sf::RenderWindow& window) {
+    for (auto& pipe : pipes) {
+        pipe.render(window);
+    }
+}
+
 bool PipeManager::collidesWith(const sf::FloatRect& bounds) const {
     for (const auto& pipe : pipes) {
         if (pipe.getTopBounds().findIntersection(bounds).has_value() || pipe.getBottomBounds().findIntersection(bounds).has_value()) {

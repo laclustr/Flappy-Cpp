@@ -6,7 +6,6 @@ add_executable(flappyBird
     objects/PipeManager.cpp
     objects/PipePair.cpp
 
-    states/BaseState.cpp
     states/CountdownState.cpp
     states/HighScoreState.cpp
     states/LostState.cpp
