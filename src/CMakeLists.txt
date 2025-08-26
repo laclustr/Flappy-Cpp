@@ -15,18 +15,12 @@ add_executable(flappyBird
     states/PlayState.cpp
     states/StateMachine.cpp
 
-    utils/GameFont.cpp
+    utils/gamefont.cpp
 )
 
 target_include_directories(flappyBird
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_SOURCE_DIR}/libs/SFML/include
-)
-
-target_link_directories(flappyBird
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/libs/SFML/lib
 )
 
 target_link_libraries(flappyBird

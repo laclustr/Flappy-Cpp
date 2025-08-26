@@ -6,7 +6,7 @@
 #include <set>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode({DISP_WIDTH, DISP_HEIGHT}), "Flappy Bird");
+    sf::RenderWindow window(sf::VideoMode(DISP_WIDTH, DISP_HEIGHT), "Flappy Bird");
     sf::Clock clock;
 
     StateMachine stateMachine(window);
@@ -16,15 +16,13 @@ int main() {
     while (window.isOpen()) {
         keysdown.clear();
 
-        while (const std::optional event = window.pollEvent()) {
-            if (event->is<sf::Event::KeyPressed>()) {
-                const auto& keyPressed = event->getIf<sf::Event::KeyPressed>();
-                if (keyPressed) {
-                    keysdown.insert(keyPressed->code);
-                }
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::KeyPressed) {
+                keysdown.insert(event.key.code);
             }
 
-            if (event->is<sf::Event::Closed>()) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
         }
@@ -33,9 +31,9 @@ int main() {
         float dt = deltaTime.asSeconds();
 
         stateMachine.update(keysdown, dt);
-        stateMachine.render();
-
+        
         window.clear();
+        stateMachine.render();
         window.display();
 
         window.setFramerateLimit(60);
