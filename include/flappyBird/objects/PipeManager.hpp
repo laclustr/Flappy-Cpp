@@ -11,13 +11,13 @@ class PipeManager {
         ~PipeManager();
 
         void update(float dt);
+        void render(sf::RenderWindow& window);
+
         bool collidesWith(const sf::FloatRect& bounds) const;
         bool hasPassed(const sf::FloatRect& bounds);
         
-        // Combined check to reduce iterations - returns {collided, passed}
         std::pair<bool, bool> checkBirdInteraction(const sf::FloatRect& bounds) const;
         
-        // Optimized version that only checks relevant pipes near the bird
         std::pair<bool, bool> checkBirdInteractionOptimized(const sf::FloatRect& bounds) const;
     private:
         std::vector<PipePair> pipes;

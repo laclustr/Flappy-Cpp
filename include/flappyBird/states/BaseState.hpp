@@ -11,5 +11,5 @@ class BaseState {
         virtual ~BaseState();
 
         virtual void update(const std::set<sf::Keyboard::Key>& keysDown, const float dt);
-        virtual void render();
+        virtual void render(sf::RenderWindow& window);
 };

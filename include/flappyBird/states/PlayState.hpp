@@ -15,7 +15,7 @@ class PlayState : public BaseState {
         ~PlayState();
 
         void update(const std::set<sf::Keyboard::Key>& keysDown, const float dt) override;
-        void render() override;
+        void render(sf::RenderWindow& window) override;
 
     private:
         StateMachine* stateMachine;

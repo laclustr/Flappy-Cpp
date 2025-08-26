@@ -1,11 +1,11 @@
 #include "flappyBird/utils/GameFont.hpp"
 
-GameFont::GameFont(const std::string& path, sf::Color color = sf::Color::White) {
+GameFont::GameFont(const std::string& path, sf::Color color) {
     this->path = path;
     textColor = color;
 
     sf::Font font;
-    if (!font.loadFromFile(path)) {
+    if (!font.openFromFile(path)) {
         throw std::runtime_error("Failed to load font: " + path);
     }
 

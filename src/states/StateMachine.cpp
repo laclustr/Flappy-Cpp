@@ -35,7 +35,7 @@ void StateMachine::update(const std::set<sf::Keyboard::Key>& keysDown, const flo
 
 void StateMachine::render() {
     if (currentState) {
-        currentState->render();
+        currentState->render(*window);
     }
 }
 

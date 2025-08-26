@@ -67,3 +67,7 @@ bool Bird::is_alive() const {
 void Bird::kill() {
     isAlive = false;
 }
+
+long long Bird::getScore() const {
+    return score;
+}

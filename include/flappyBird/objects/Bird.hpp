@@ -18,6 +18,8 @@ class Bird {
         bool hits_bottom();
         bool above_screen();
 
+        long long getScore() const;
+
         bool is_alive() const;
         void kill();
 

@@ -28,14 +28,14 @@ class StateMachine {
         void singlePlayer();
         void multiPlayer();
 
+        GameFont font;
+
         std::vector<Bird*>& getBirds();
     private:
         sf::RenderWindow* window;
         std::set<sf::Keyboard::Key> keysDown;
 
         std::vector<Bird*> birds;
-
-        GameFont font;
 
         std::unordered_map<State, BaseState*> states;
 
