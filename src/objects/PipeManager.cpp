@@ -29,9 +29,7 @@ void PipeManager::update(float dt) {
 
 bool PipeManager::collidesWith(const sf::FloatRect& bounds) const {
     for (const auto& pipe : pipes) {
-        std::optional<sf::FloatRect> topIntersection = pipe.getTopBounds().findIntersection(bounds);
-        std::optional<sf::FloatRect> bottomIntersection = pipe.getBottomBounds().findIntersection(bounds);
-        if (topIntersection.has_value() || bottomIntersection.has_value()) {
+        if (pipe.getTopBounds().intersects(bounds) || pipe.getBottomBounds().intersects(bounds)) {
             return true;
         }
     }
@@ -53,9 +51,7 @@ std::pair<bool, bool> PipeManager::checkBirdInteraction(const sf::FloatRect& bou
     
     for (const auto& pipe : pipes) {
         if (!collided) {
-            std::optional<sf::FloatRect> topIntersection = pipe.getTopBounds().findIntersection(bounds);
-            std::optional<sf::FloatRect> bottomIntersection = pipe.getBottomBounds().findIntersection(bounds);
-            if (topIntersection.has_value() || bottomIntersection.has_value()) {
+            if (pipe.getTopBounds().intersects(bounds) || pipe.getBottomBounds().intersects(bounds)) {
                 collided = true;
                 return {true, false};
             }
@@ -73,15 +69,15 @@ std::pair<bool, bool> PipeManager::checkBirdInteractionOptimized(const sf::Float
     bool collided = false;
     bool passed = false;
     
-    const float birdLeft = bounds.position.x;
-    const float birdRight = bounds.position.x + bounds.size.x;
+    const float birdLeft = bounds.left;
+    const float birdRight = bounds.left + bounds.width;
     
     for (const auto& pipe : pipes) {
         const sf::FloatRect topBounds = pipe.getTopBounds();
         const sf::FloatRect bottomBounds = pipe.getBottomBounds();
         
-        const float pipeLeft = topBounds.position.x;
-        const float pipeRight = topBounds.position.x + topBounds.size.x;
+        const float pipeLeft = topBounds.left;
+        const float pipeRight = topBounds.left + topBounds.width;
         
         if (pipeLeft > birdRight + 50.0f) {
             continue;
@@ -95,11 +91,8 @@ std::pair<bool, bool> PipeManager::checkBirdInteractionOptimized(const sf::Float
         }
         
         if (!collided) {
-            std::optional<sf::FloatRect> topIntersection = topBounds.findIntersection(bounds);
-            std::optional<sf::FloatRect> bottomIntersection = bottomBounds.findIntersection(bounds);
-            if (topIntersection.has_value() || bottomIntersection.has_value()) {
+            if (topBounds.intersects(bounds) || bottomBounds.intersects(bounds)) {
                 collided = true;
-
                 return {true, false};
             }
         }
