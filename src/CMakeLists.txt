@@ -15,7 +15,7 @@ add_executable(flappyBird
     states/PlayState.cpp
     states/StateMachine.cpp
 
-    utils/GameFont.cpp
+    utils/gamefont.cpp
 )
 
 target_include_directories(flappyBird
